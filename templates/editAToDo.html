@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+{% block title %}
+  To-Do | Edit To-Do
+{% endblock %}
+
+{% block body %}
+    <div class="to-do-content">
+        <fieldset>
+            <legend>Modify description / time / images</legend>
+            <form action="/user/edit-a-To-Do/{{data['title']}}" method="post">
+                <label>
+                    Title : <input readonly type="text" name="title" value="{{data['title']}}">
+                </label>
+                <br>
+                <label>
+                    Descriptions : <textarea name="description">{{data['description']}}</textarea>
+                </label>
+                <br>
+                <label>
+                    Time : <input class="time-img" type="time" name="time" value="{{data['time']}}">
+                </label>
+                <br>
+                {% if pro == True %}
+                <label>
+                    Images : <input class="time-img" type="text" name="images" value="{{data['images']}}">
+                </label>
+                <br>
+                {% endif %}
+                <label>
+                    <input type="submit" class="send" value="Modify">
+                </label>
+            </form>
+        </fieldset>
+    </div>
+{% endblock %}

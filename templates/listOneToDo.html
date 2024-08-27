@@ -1,0 +1,55 @@
+{% extends 'index.html' %}
+{% block title %}
+  To-Do | To-Do
+{% endblock %}
+
+{% block body %}
+    <div class="to-do-content">
+        {% if data == None %}
+            <fieldset>
+                <legend>Enter the Title</legend>
+                <form action="/user/list-a-To-Do" method="post">
+                    <label>
+                        Title : <input type="text" name="title">
+                    </label>
+                    <br>
+                    <label>
+                        <input type="submit" class="send">
+                    </label>
+                </form>
+            </fieldset>
+        {% else %}
+            <fieldset>
+                <legend>Enter the Title</legend>
+                <form action="/user/list-a-To-Do" method="post">
+                    <label>
+                        Title : <input type="text" name="title">
+                    </label>
+                    <br>
+                    <label>
+                        <input type="submit" class="send">
+                    </label>
+                </form>
+            </fieldset>
+
+            <h1>To-Do</h1>
+            <table border="2" cellpadding="7" cellspacing="5">
+                <tr class="head">
+                    <td>Title</td>
+                    <td>Description</td>
+                    <td>Time</td>
+                    <td>Images</td>
+                    <td colspan="2">Options</td>
+                </tr>
+                <tr>
+                    <td>{{data['title']}}</td>
+                    <td>{{data['description']}}</td>
+                    <td>{{data['time']}}</td>
+                    <td>{{data['images']}}</td>
+                    <td><button class="edit"><a href="/user/edit-a-To-Do/{{data['title']}}">edit</a></button></td>
+                    <td><button class="delete"><a href="/user/delete-a-To-Do/{{data['title']}}">DELETE</a></button></td>
+                </tr>
+            </table>
+        {% endif %}
+    </div>
+{% endblock %}

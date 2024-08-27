@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <title>{% block title %} To-Do | Home {% endblock %}</title>
+        <link rel="stylesheet" href="{{url_for('static', filename='../static/styler.css')}}">
+</head>
+    <body>
+        <nav>
+            <h1>Welcome {{name}} to T0-Do List </h1>
+            <ul>
+                <li><a href="/">HOME</a></li>
+                {% if logged == True %}
+                <li><a href="/user/list-all-To-Dos">List all To-Dos</a></li>
+                <li><a href="/user/list-a-To-Do">List a To-Do</a></li>
+                <li><a href="/user/add-a-To-Do">Add a To-Do</a></li>
+                {% if pro == True %}
+                <li class="pro-btn">YOU ARE PRO LICENSED</li>
+                {% elif pro == False %}
+                <li class="pro-btn"><a href="/user/buy-pro-license">Buy Pro License</a></li>
+                {% endif %}
+                <li id="logout"><a href="/user/logout">Logout</a></li>
+                {% elif logged == False %}
+                <li id="login"><a href="/login">Login</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+        <hr id="nav-hr">
+
+        {% block body %}
+        <div class="to-do-content" id="index-div">
+            <h1><u>Instructions For Usage</u></h1>
+                <ul>
+                    <li><section><h2> Login \ Logout</h2>
+                            <ul>
+                                <li>To <b>login</b> click the GREEN colored login button on the homepage of the
+                                    web-application. It would redirect you to the keycloak login page. Here you can
+                                register yourself if not already, else login with your details. After successful
+                                    login you would see the homepage again, with more button on the navigation bar
+                                    to use the web-application.</li>
+                                <li>To <b>logout</b> click the RED colored logout button, that would appear after you have
+                                    successfully logged-in,
+                                    on the homepage of the
+                                    web-application. After that extra buttons would disappear, not allowing you to
+                                    manipulate the To-Do list.</li>
+                            </ul>
+                    </section></li>
+                    <hr>
+                    <li><section><h2> List all To-Do \ List a To-Do</h2>
+                            <ul>
+                                <li>To <b>list all To-Do</b> after the login, click the 'List all To-Do', it would take
+                                    you
+                                    to 'list all To-Do' page, where you would find a table, listing all the details
+                                    of the To-Dos available. The details are: Title, Description, Time and Images
+                                    (for pro users only). This table would consist of an extra column naming options
+                                which would give you facility to edit or delete any task.</li>
+                                <li>To <b>list a To-Do</b> after the login, click the 'List a To-Do', it would
+                                    take
+                                    you
+                                    to 'list a To-Do' page, where you would find an input field to enter the To-Do
+                                    title, after clicking the 'submit' button, it would display the To-Do below in a
+                                    table format (if exist). The details are: Title, Description, Time and Images
+                                    (for pro users only). This table would consist of an extra column naming options
+                                which would give you facility to edit or delete any task.<br>The input field for
+                                    title would still be displayed after the search result, just to search another
+                                    To-Do.</li>
+                                <li>Non-Pro License Users would see the Images column in the table filled with
+                                    'None'.<br>Pro License Users which have not added any images, would see the
+                                    same.</li>
+                            </ul>
+                    </section></li>
+                    <hr>
+                    <li><section><h2> Add a To-Do</h2>
+                            <ul>
+                                <li>To add a To-Do after the login, click the 'Add a To-Do' and enter the details of
+                                    the To-Do. Pro users would also be able to add images in their To-Dos. After
+                                    successful addition of the To-Do into the database, you would be redirected to
+                                    'List A To-Do' page, where you would see your recently created To-Do. The
+                                    details that would be asked for creating a new To-Do would be: Title,
+                                    Description, Time and Images (for pro users only)
+                                    .<br><b>NOTE: TITLE FOR EACH AND EVERY TO-DO ARE UNIQUE, MAKE SURE TO ENTER
+                                        UNIQUE TITLE, FOR EVERY TO-DO, IN ORDER TO SUCCESSFUL CREATION OF TO-DO,
+                                        ELSE IT'LL FAIL.</b></li>
+                            </ul>
+                    </section></li>
+                    <hr>
+                    <li><section><h2> Edit a To-Do</h2>
+                            <ul>
+                                <li>To edit a To-Do after the login, click the 'List all To-Do' or 'List a To-Do'
+                                    (and search for specific To-Do)
+                                    after that
+                                     click the 'edit' button in the 'Options' column of the table. This will redirect
+                                    you to the 'edit a To-Do' page, where the form would be pre-filled by the
+                                    previous data of the To-Do, allowing you to manipulate the description, time and
+                                    images (for pro users only). After the changes click the 'Modify' button below,
+                                    and it would redirect you to the 'List all To-Do', where you would be able to see
+                                    the changes you modified.</li>
+                            </ul>
+                    </section></li>
+                    <hr>
+                    <li><section><h2> Delete a To-Do</h2>
+                            <ul>
+                                <li>To delete a To-Do after the login, click the 'List all To-Do' or 'List a To-Do'
+                                    (and search for specific To-Do)
+                                    after that
+                                     click the 'delete' button in the 'Options' column of the table. This will delete
+                                    the To-Do from the database, and you can see the changes on the spot.</li>
+                            </ul>
+                    </section></li>
+                    <hr>
+                    <li><section><h2> Pro License</h2>
+                            <ul>
+                                <li>To get a Pro License and able to add images to you To-Dos, click on the sky-blue Buy
+                                    Pro
+                                    License button in the navigation bar. This would redirect you to the 'Stripe'
+                                    payment gateway, where you would be able to subscribe to the To-Do Pro License.
+                                <br>After the successful payment, it would take you to the Thank-you page, ensuring
+                                    your confirmation of the subscription.<br>If the payment is failed due to any
+                                    of the issues, it would redirect you to the retry payment page from where you
+                                    can go to home page and retry the payment of the subscription.<br>Once the
+                                    payment is successful, you would be a Pro Licensed user until the subscription
+                                    ends. Also, the sky-blue 'Buy Pro License' would be converted into the 'YOU ARE
+                                PRO LICENSED button.</li>
+                            </ul>
+                    </section></li>
+                </ul>
+        </div>
+        {% endblock %}
+            <hr>
+            <b>by: Rishabh Mudgal | @Mr Mudgal</b>
+            <hr>
+
+    </body>
+</html>

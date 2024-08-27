@@ -1,0 +1,31 @@
+{% extends 'index.html' %}
+{% block title %}
+  To-Do | All To-Do
+{% endblock %}
+
+{% block body %}
+    <div class="to-do-content">
+        <h1>ALL TO-DO</h1>
+        <table border="2" cellpadding="7" cellspacing="5">
+            <tr class="head">
+                <td>Sr. No.</td>
+                <td>Title</td>
+                <td>Description</td>
+                <td>Time</td>
+                <td>Images</td>
+                <td colspan="2">Options</td>
+            </tr>
+            {% for todos in data %}
+            <tr>
+                <td>{{data.index(todos)+1}}</td>
+                <td>{{todos['title']}}</td>
+                <td>{{todos['description']}}</td>
+                <td>{{todos['time']}}</td>
+                <td>{{todos['images']}}</td>
+                <td><button class="edit"><a href="/user/edit-a-To-Do/{{todos['title']}}">edit</a></button></td>
+                <td><button class="delete"><a href="/user/delete-a-To-Do/{{todos['title']}}">DELETE</a></button></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock %}
